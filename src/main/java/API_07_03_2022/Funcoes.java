@@ -14,9 +14,11 @@ public class Funcoes {
         System.out.println("Terc. Valor: ");
         double n3 = ent.nextDouble();
         
+        double media = CalcularMedia(n1, n2, n3);
+        System.out.println("Sua média é: "+media);
     }
     
-    public double CalcularMedia(double nota1, double nota2, double nota3) {
+    public static double CalcularMedia(double nota1, double nota2, double nota3) {
         double media = (nota1 + nota2 + nota3) / 3;
         return media;
     }
