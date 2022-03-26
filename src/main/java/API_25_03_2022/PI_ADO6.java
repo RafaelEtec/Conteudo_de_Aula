@@ -43,5 +43,8 @@ public class PI_ADO6 {
                     break;
             }
         } while (!correto && tentativas != 0);
+        if (tentativas == 0) {
+            System.out.println("Você excedeu o número de tentativas!");
+        }
     }
 }
