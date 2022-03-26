@@ -9,16 +9,17 @@ public class PI_ADO6 {
         String resp;
         boolean correto = false;
         int tentativas = 3;
-        System.out.println(
+        String pergunta =
                   "Segundo o Sistema de Numeração Egípcio.\n"
                 + "O número 1000 corresponde a: \n"
                 + "(A) Bastão\n"
                 + "(B) Rolo de Corda\n"
                 + "(C) Peixe\n"
                 + "(D) Flor de Lótus\n"
-                + "(E) Homem\n");
+                + "(E) Homem\n";
         
         do {
+            System.out.println(pergunta);
             resp = ent.next();
             switch (resp.toLowerCase()) {
                 case "a":
