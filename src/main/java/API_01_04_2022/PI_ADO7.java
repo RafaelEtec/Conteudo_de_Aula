@@ -13,45 +13,45 @@ public class PI_ADO7 {
         String resp;
         boolean correto = false;
         int tentativas = 3;
-        int[] posAlt = {0, 1, 2, 3, 4};
-        String[] alternativa = {"Bastão", "Rolo de Corda", "Peixe", "Flor de Lótus", "Homem"};
+        String[] alternativas = {"Bastão", "Rolo de corda", "Peixe", "Flor de Lótus", "Homem"};
         String pergunta = 
                   "Segundo o Sistema de Numeração Egípcio.\n"
                 + "O número 1000 corresponde a: \n";
-        String[] alternativaOpcao = {
-                  "(A) "+alternativa[posAlt[0]]
-                , "(B) "+alternativa[posAlt[1]]
-                , "(C) "+alternativa[posAlt[2]]
-                , "(D) "+alternativa[posAlt[3]]
-                , "(E) "+alternativa[posAlt[4]] };
-        
+        String certoErrado = "";
         do {
+            trocarAlternativas(alternativas);
             System.out.println(pergunta);
-            for (int pos = 0; pos < alternativaOpcao.length; pos++) {
-                System.out.println(alternativaOpcao[pos]);
-            }
-            
+            System.out.println(
+                    "(A) "+alternativas[0]
+                + "\n(B) "+alternativas[1]
+                + "\n(C) "+alternativas[2]
+                + "\n(D) "+alternativas[3]
+                + "\n(E) "+alternativas[4] ); 
             resp = ent.next();
-            
             switch (resp.toLowerCase()) {
                 case "a":
-                    System.out.println("Resposta Incorreta!");
+                    System.out.println(certoErrado(retornoResp(alternativas, resp)));
+                    correto = retornoResp(alternativas, resp);
                     tentativas--;
                     break;
                 case "b":
-                    System.out.println("Resposta Incorreta!");
+                    System.out.println(certoErrado(retornoResp(alternativas, resp)));
+                    correto = retornoResp(alternativas, resp);
                     tentativas--;
                     break;
                 case "c":
-                    System.out.println("Resposta Incorreta!");
+                    System.out.println(certoErrado(retornoResp(alternativas, resp)));
+                    correto = retornoResp(alternativas, resp);
                     tentativas--;
                     break;
                 case "d":
-                    System.out.println("<D> É a Resposta Correta!");
-                    correto = true;
+                    System.out.println(certoErrado(retornoResp(alternativas, resp)));
+                    correto = retornoResp(alternativas, resp);
+                    tentativas--;
                     break;
                 case "e":
-                    System.out.println("Resposta Incorreta!");
+                    System.out.println(certoErrado(retornoResp(alternativas, resp)));
+                    correto = retornoResp(alternativas, resp);
                     tentativas--;
                     break;
             }
@@ -62,21 +62,38 @@ public class PI_ADO7 {
         }
     }
     
-    public static String[] trocarAlternativas(String[] alternativa) {
+    public static boolean retornoResp(String[] alternativas, String resp) {
+        boolean retornoResp = false;
+        if (resp.equals("a") && alternativas[0].equals("Flor de Lótus")) {
+            retornoResp = true;
+        } else if (resp.equals("b") && alternativas[1].equals("Flor de Lótus")) {
+            retornoResp = true;
+        } else if (resp.equals("c") && alternativas[2].equals("Flor de Lótus")) {
+            retornoResp = true;
+        } else if (resp.equals("d") && alternativas[3].equals("Flor de Lótus")) {
+            retornoResp = true;
+        } else if (resp.equals("e") && alternativas[4].equals("Flor de Lótus")) {
+            retornoResp = true;
+        }
         
-        List<String> strAlternativas = Arrays.asList(alternativa);
-        Collections.shuffle(strAlternativas);
-        strAlternativas.toArray(alternativa);
-
-        return alternativa;
+        return retornoResp;
     }
     
-    public static int[] trocarPosicao(int[] posAlt) {
+    public static String certoErrado(boolean retornoResp) {
+        String certoErrado = "Resposta Incorreta!";
         
-        List<Integer> intList = Arrays.asList(posAlt);
-        Collections.shuffle(intList);
-        intList.toArray(posAlt);
+        if (retornoResp) {
+            certoErrado = "Resposta Correta!";
+        }
         
-        return posAlt;
+        return certoErrado;
+    }
+    
+    public static String[] trocarAlternativas(String[] alternativas) {
+        List<String> strList = Arrays.asList(alternativas);
+        Collections.shuffle(strList);
+        strList.toArray(alternativas);
+        
+        return alternativas;
     }
 }
