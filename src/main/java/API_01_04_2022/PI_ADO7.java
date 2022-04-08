@@ -57,7 +57,7 @@ public class PI_ADO7 {
             }
             
         } while (!correto && tentativas != 0);
-        if (tentativas == 0) {
+        if (tentativas == 0 && !correto) {
             System.out.println("Você excedeu o número de tentativas!");
         }
     }
