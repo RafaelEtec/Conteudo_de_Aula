@@ -8,9 +8,12 @@ import java.util.ArrayList;
 **/
 public class PI_ADO8 {
     public static void main(String[] args) {
+        // Iniciando variáveis
         Scanner ent = new Scanner(System.in);
         int tamanhoCaminho = 123, qntBombas = 0;
+        boolean vivo = true;
         
+        // Inserindo valores
         System.out.println(
                 "|-------------------------| Caminho Minado |-------------------------| \n"
               + "| Informe o tamanho do caminho:                                      |");
@@ -40,53 +43,38 @@ public class PI_ADO8 {
             qntBombas = ent.nextInt();
         }
         
-        System.out.println(
-                "|-------------------------| Caminho Minado |-------------------------|");
-        for (int pos = 0; pos < tamanhoCaminho; pos++) {
-            if (pos == 0) {
-                System.out.print("|-");
-            }
-            System.out.print(" "+pos+" -");
-            if (pos == (tamanhoCaminho - 1)) {
-                System.out.print("|");
-            }
-        }
-        System.out.println();
-        for (int pos = 0; pos < tamanhoCaminho; pos++) {
-            if (pos == 0) {
-                System.out.print("|-");
-            }
-            if (pos >= 100) {
-                System.out.print(" ___ -");
-            } else if (pos >= 10) {
-                System.out.print(" __ -");
-            } else {
-                System.out.print(" _ -");
-            }
-            if (pos == (tamanhoCaminho - 1)) {
-                System.out.print("|");
-            }
-        }
-        
         int[] caminho = new int[tamanhoCaminho];
-        for (int pos = 0; pos < tamanhoCaminho; pos++) {
-            caminho[pos] = 0;
+        
+        // Visualizando o caminho
+        while (vivo) {
+            System.out.println(
+                "|-------------------------| Caminho Minado |-------------------------|");
+            for (int pos = 0; pos < tamanhoCaminho; pos++) {
+                if (pos == 0) {
+                    System.out.print("|-");
+                }
+                System.out.print(" "+pos+" -");
+                if (pos == (tamanhoCaminho - 1)) {
+                    System.out.print("|");
+                }
+            }
+            System.out.println();
+            for (int pos = 0; pos < tamanhoCaminho; pos++) {
+                if (pos == 0) {
+                    System.out.print("|-");
+                }
+                if (pos >= 100) {
+                    System.out.print(" ___ -");
+                } else if (pos >= 10) {
+                    System.out.print(" __ -");
+                } else {
+                    System.out.print(" _ -");
+                }
+                if (pos == (tamanhoCaminho - 1)) {
+                    System.out.print("|");
+                }
+            }
+            vivo = false;
         }
-    }
-    
-    public static int[] entIntArray() {
-        Scanner ent = new Scanner(System.in);
-        
-        System.out.println("Insira a quantidade de números a serem guardados: ");
-        int tamanhoArray = ent.nextInt();
-        int[] entIntArray = new int[tamanhoArray];
-        
-        for (int pos = 0; pos < tamanhoArray; pos++) {
-            System.out.println("pos: "+pos+" - Insira o número da posição: ");
-            int num = ent.nextInt();
-            entIntArray[pos] = num;
-        }
-        
-        return entIntArray;
-    }
+    } 
 }
