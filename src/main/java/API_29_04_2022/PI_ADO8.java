@@ -112,24 +112,30 @@ public class PI_ADO8 {
             }
             
             // Permitindo que o usuário decida a posição que será descoberta
-            System.out.println(
+            if (vivo) {
+                System.out.println(
                 "| Informe a posição a ser atacada:                                   |");
             posJogador = ent.nextInt();
-            
+            }
+
             for (int pos = 0; pos < tamanhoCaminho; pos++) {
-                if (caminho[pos].equals("-1")) {
+                if (caminho[posJogador].equals("-1")) {
                     System.out.println(
                             "|                           Game Over !                              |");
                     if (points >= 100) {
                         System.out.println(
                             "| Sua Pontuação: "+points+"                                                 |");
+                        break;
                     } else if (points >= 10) {
                         System.out.println(
                             "| Sua Pontuação: "+points+"                                                  |");
+                        break;
                     } else if (points < 10) {
                         System.out.println(
                             "| Sua Pontuação: "+points+"                                                   |");
+                        break;
                     }
+                    vivo = false;
                 } else {
                     caminhoVis[posJogador] = "x";
                 }
