@@ -8,9 +8,10 @@ public class PI_ADO8 {
     public static void main(String[] args) {
         // Iniciando variáveis
         Scanner ent = new Scanner(System.in);
-        int tamanhoCaminho = 123, qntBombas = 0, bombasNoJogo = 0;
+        int tamanhoCaminho = 123, qntBombas = 0, bombasNoJogo = 0, posJogador = 0, points = 0;
         int[] bombasPos = new int[qntBombas];
-        boolean vivo = true;
+        boolean vivo = true, start = true;
+        Random ran = new Random();
         
         // Inserindo valores
         System.out.println(
@@ -41,24 +42,19 @@ public class PI_ADO8 {
             }
             qntBombas = ent.nextInt();
         }
-        
-        // criando o caminho
-        // int valor = new Random().nextInt(tamanhoCaminho) + 1;
-        int[] caminho = new int[tamanhoCaminho];
-        for (int pos = 0; pos < qntBombas; pos++) {
-            int posBombas = new Random().nextInt(tamanhoCaminho) + 1;
-            
-        }
-        
-        for (int pos = 0; pos < tamanhoCaminho; pos++) {
-            
-            
-        }
+        int posBombasArray[] = new int[qntBombas];
+        // criando o caminho para visualização
+        String[] caminhoVis = new String[tamanhoCaminho];
+        // criando o caminho para atribuir as bombas
+        String[] caminho = new String[tamanhoCaminho];
         
         // Visualizando o caminho
         while (vivo) {
+            System.out.println();
             System.out.println(
                 "|-------------------------| Caminho Minado |-------------------------|");
+            
+            // Visualização do número das posições
             for (int pos = 0; pos < tamanhoCaminho; pos++) {
                 if (pos == 0) {
                     System.out.print("|");
@@ -66,44 +62,92 @@ public class PI_ADO8 {
                 System.out.print(" "+pos+" |");
             }
             System.out.println();
-            for (int pos = 0; pos < tamanhoCaminho; pos++) {
-                if (pos == 0) {
-                    System.out.print("|");
-                }
-                if (pos >= 100) {
-                    System.out.print(" ___ |");
-                } else if (pos >= 10) {
-                    System.out.print(" __ |");
-                } else {
-                    System.out.print(" _ |");
+            
+            // Visualização das posições disponíveis
+            if (start) {
+                for (int pos = 0; pos < tamanhoCaminho; pos++) {
+                    if (pos >= 100) {
+                        caminhoVis[pos] = "___";
+                    } else if (pos >= 10) {
+                        caminhoVis[pos] = "__";
+                    } else {
+                        caminhoVis[pos] = "_";
+                    }
                 }
             }
-            System.out.println();
             for (int pos = 0; pos < tamanhoCaminho; pos++) {
                 if (pos == 0) {
                     System.out.print("|");
                 }
                 if (pos >= 100) {
-                    if (caminho[pos] == -1) {
-                        System.out.print("  "+caminho[pos]+" |");
+                    if (caminhoVis[pos].equals("-1")) {
+                        System.out.print("  "+caminhoVis[pos]+" |");
                     } else {
-                        System.out.print("   "+caminho[pos]+" |");
+                        System.out.print(" "+caminhoVis[pos]+" |");
                     }
                 } else if (pos >= 10) {
-                    if (caminho[pos] == -1) {
-                        System.out.print(" "+caminho[pos]+" |");
+                    if (caminhoVis[pos].equals("-1")) {
+                        System.out.print(" "+caminhoVis[pos]+" |");
                     } else {
-                        System.out.print("  "+caminho[pos]+" |");
+                        System.out.print(" "+caminhoVis[pos]+" |");
                     }              
                 } else {
-                    if (caminho[pos] == -1) {
-                        System.out.print(""+caminho[pos]+" |");
+                    if (caminhoVis[pos].equals("-1")) {
+                        System.out.print(""+caminhoVis[pos]+" |");
                     } else {
-                        System.out.print(" "+caminho[pos]+" |");
+                        System.out.print(" "+caminhoVis[pos]+" |");
                     }
                 }
             }
+            
+            // Embaralhando as bombas
+            if (start) {
+                System.out.println();
+                for (int pos = 0; pos < qntBombas; pos++) {
+                    int posBombas = ran.nextInt(tamanhoCaminho);
+                    caminho[posBombas] = "-1";
+                    posBombasArray[pos] = posBombas;
+                    System.out.print(posBombasArray[pos]+" ");
+                }
+            }
+            
+            // Permitindo que o usuário decida a posição que será descoberta
+            System.out.println(
+                "| Informe a posição a ser atacada:                                   |");
+            posJogador = ent.nextInt();
+            
+            for (int pos = 0; pos < tamanhoCaminho; pos++) {
+                if (caminho[pos].equals("-1")) {
+                    System.out.println(
+                            "|                           Game Over !                              |");
+                    if (points >= 100) {
+                        System.out.println(
+                            "| Sua Pontuação: "+points+"                                                 |");
+                    } else if (points >= 10) {
+                        System.out.println(
+                            "| Sua Pontuação: "+points+"                                                  |");
+                    } else if (points < 10) {
+                        System.out.println(
+                            "| Sua Pontuação: "+points+"                                                   |");
+                    }
+                } else {
+                    caminhoVis[posJogador] = "x";
+                }
+            }
+            
             vivo = false;
-        }
+            if (start) {
+                vivo = true;
+            }
+            start = false;
+        }  
     } 
 }
+/**String[] caminho = new String[tamanhoCaminho];
+        for (int pos = 0; pos < qntBombas; pos++) {
+            int posBombas = ran.nextInt(tamanhoCaminho) + 1;
+            caminho[posBombas] = "-1";
+            posBombasArray[pos] = posBombas;
+            System.out.print(posBombasArray[pos]+" ");
+        }
+**/
