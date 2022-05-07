@@ -223,22 +223,53 @@ public class PI_ADO8 {
     
     public static int[] embaralhaBombas(int tamanhoCaminho, int qntBombas) {
         Random ran = new Random();
-        int[] posBombasArray = new int[qntBombas];
+
+        System.out.println("Tamanho caminho: " + tamanhoCaminho);
+
+        int[] posBombasArray = new int[tamanhoCaminho];
+
         int posBombas = 0, guarda;
+
         boolean start = true;
-        for (int pos = 0; pos < qntBombas; pos++) {
-            posBombas = ran.nextInt(tamanhoCaminho);
-            posBombasArray[pos] = posBombas;
-            guarda = posBombas;
-            for (int posA = 0; posA < qntBombas; posA++) {
-                if (guarda == posBombasArray[posA]) {
-                    posBombas = ran.nextInt(tamanhoCaminho);
-                    posBombasArray[pos] = posBombas;
-                    guarda = posBombas;
-                }
+
+//        for (int pos = 0; pos < qntBombas; pos++) {
+//            posBombas = ran.nextInt(tamanhoCaminho);
+//            for (int posA = 0; posA < qntBombas; posA++) {
+//                if (posBombasArray[pos] == posBombasArray[posA]) {
+//                    posBombas = ran.nextInt(tamanhoCaminho);
+//                    posBombasArray[pos] = posBombas;
+//                } else {
+//                    posBombasArray[pos] = posBombas;
+//                }
+//            }
+//            System.out.print(posBombasArray[pos]+" ");
+//        }
+
+        int numeroBombasColocadas = 0;
+        while (numeroBombasColocadas<qntBombas) {
+
+            posBombas = ran.nextInt(tamanhoCaminho-1);
+            if(posBombasArray[posBombas]!=-1){
+                posBombasArray[posBombas] = -1; 
+                numeroBombasColocadas++;
             }
-            System.out.print(posBombasArray[pos]+" ");
+
+
+//            for (int posA = 0; posA < qntBombas; posA++) {
+//                if (posBombasArray[pos] == posBombasArray[posA]) {
+//                    posBombas = ran.nextInt(tamanhoCaminho);
+//                    posBombasArray[pos] = posBombas;
+//                } else {
+//                    posBombasArray[pos] = posBombas;
+//                }
+//            }
+//            System.out.print(posBombasArray[pos]+" ");
         }
+
+        for(int i=0;i<posBombasArray.length;i++){
+            System.out.print(posBombasArray[i] + "\t");
+        }
+
         return posBombasArray;
     }
     
