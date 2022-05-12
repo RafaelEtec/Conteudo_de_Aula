@@ -190,7 +190,7 @@ public class Final_ADO8 {
                         System.out.println(
                         "| Cuidado ! Há bombas por perto!                                     |");
                     }
-                } else if (caminho[(posJogador - 1)] == -1 || caminho[(posJogador + 1)] == -1) {
+                } else if (caminho[(posJogador - 1)] == -1) {
                     System.out.println(
                         "| Cuidado ! Há bombas por perto!                                     |");
                 }
@@ -223,16 +223,31 @@ public class Final_ADO8 {
     
     public static int[] embaralhaBombas(int tamanhoCaminho, int qntBombas) {
         Random ran = new Random();
-        int[] posBombasArray = new int[qntBombas];
-        int posBombas = 0, guarda;
-        boolean start = true;
-        for (int pos = 0; pos < qntBombas; pos++) {
-            posBombas = ran.nextInt(tamanhoCaminho);
-            posBombasArray[pos] = posBombas;
-            guarda = posBombas;
-            System.out.print(posBombasArray[pos]+" ");
+        int[] posBombasArray = new int[tamanhoCaminho];
+        int[] retornaBombas = new int[qntBombas];
+        int posBombas = 0, checkBombs = 0;
+        int numeroBombasColocadas = 0;
+        while (numeroBombasColocadas<qntBombas) {
+            posBombas = ran.nextInt(tamanhoCaminho-1);
+            if(posBombasArray[posBombas]!=-1){
+                posBombasArray[posBombas] = -1; 
+                numeroBombasColocadas++;
+            }
         }
-        return posBombasArray;
+        for (int pos = 0; pos < posBombasArray.length; pos++) {
+            if (posBombasArray[pos] == -1) {
+                retornaBombas[checkBombs] = pos;
+                checkBombs++;
+            }
+        }
+        
+        // Mostra a posição das bombas
+        //
+        //for (int pos = 0; pos < posBombasArray.length; pos++) {
+        //    System.out.print(posBombasArray[pos]+"\t");
+        //}
+
+        return retornaBombas;
     }
     
     public static void visualizaPontos(int pontos) {
