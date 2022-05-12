@@ -6,14 +6,9 @@ import java.util.Scanner;
 **/
 public class PI_ADO8 {
     public static void main(String[] args) {
-        // Iniciando variáveis
         Scanner ent = new Scanner(System.in);
         int tamanhoCaminho = 0, qntBombas, pontos = 0, posJogador;
         boolean jogando = true;
-        Random ran = new Random();
-        
-        // Inserindo valores
-        // Tamanho do Caminho
         System.out.println(
                 "|-------------------------| Caminho Minado |-------------------------| \n"
               + "| Informe o tamanho do caminho:                                      |");
@@ -24,8 +19,6 @@ public class PI_ADO8 {
               + "| Informe novamente:                                                 |");
             tamanhoCaminho = ent.nextInt();
         }
-        
-        // Quantidade de bombas
         System.out.println(
                 "| Informe a quantidade de Bombas:                                    |");
         qntBombas = ent.nextInt();
@@ -42,37 +35,24 @@ public class PI_ADO8 {
             }
             qntBombas = ent.nextInt();
         }
-        
-        // Criando Array para guardar a quantidade de bombas para posteriormente
-        // atruir as bombas à sua posição
         int posBombasArray[] = new int[qntBombas];
         posBombasArray = embaralhaBombas(tamanhoCaminho, qntBombas);
-        // Criando o caminho para visualização
         String[] caminhoVis = new String[tamanhoCaminho];
         caminhoVis = visualizaPosDis(tamanhoCaminho);
-        // Criando o caminho para atribuir as bombas
         int[] caminho = new int[tamanhoCaminho];
-        
-        // Atribuindo valores ao caminho
         for (int pos = 0; pos < tamanhoCaminho; pos++) {
             caminho[pos] = 0;
         }
-        // Atribuindo as bombas ao caminho
         for (int pos = 0; pos < qntBombas; pos++) {
             int guarda = posBombasArray[pos];
             caminho[guarda] = -1;
         }
-        
-        //Visualizando o caminho
         while (jogando) {
             System.out.println();
             System.out.println(
                 "|-------------------------| Caminho Minado |-------------------------|");
-            
-            // Visualização dos números das posições
             visualizaPosicoes(tamanhoCaminho);
             System.out.println();
-            // Visualização das posições disponíveis
             for (int pos = 0; pos < tamanhoCaminho; pos++) {
                 if (pos == 0) {
                     System.out.print("|");
@@ -85,8 +65,6 @@ public class PI_ADO8 {
                     System.out.print(" "+caminhoVis[pos]+" |");
                 }
             }
-            
-            // Permitindo que o usuário decida a posição que será descoberta
             System.out.println();
             System.out.println(
                 "| Informe a posição a ser atacada:                                   |");
@@ -103,8 +81,6 @@ public class PI_ADO8 {
                   + "| Insira novamente:                                                  |");
                 posJogador = ent.nextInt();
             }
-            
-            // Verificando se há uma bomba na posição indicada
             if (caminho[posJogador] == -1) {
                 visualizaPosicoes(tamanhoCaminho);
                 System.out.println();
@@ -138,7 +114,6 @@ public class PI_ADO8 {
                 visualizaPontos(pontos);
                 jogando = false;
             } else {
-                // Demarcando a posição
                 if (posJogador >= 100) {
                     caminhoVis[posJogador] = " x ";
                 } else if (posJogador >= 10) {
@@ -149,8 +124,6 @@ public class PI_ADO8 {
                 caminho[posJogador] = 1;
                 pontos++;
             }
-            
-            // Caso tenha ganhado
             if (pontos == (tamanhoCaminho - qntBombas)) {
                 visualizaPosicoes(tamanhoCaminho);
                 System.out.println();
@@ -182,8 +155,6 @@ public class PI_ADO8 {
                 System.out.println("");
                 jogando = false;
             }
-            
-            // Verificando se há bombas por perto
             if (jogando) {
                 if (posJogador == 0) {
                     if (caminho[(posJogador + 1)] == -1) {
@@ -197,7 +168,6 @@ public class PI_ADO8 {
             }
         }
     }
-    
     public static void visualizaPosicoes(int tamanhoCaminho) {
         for (int pos = 0; pos < tamanhoCaminho; pos++) {
             if (pos == 0) {
@@ -206,7 +176,6 @@ public class PI_ADO8 {
             System.out.print(" "+pos+" |");
         }
     }
-    
     public static String[] visualizaPosDis(int tamanhoCaminho) {
         String[] caminhoVis = new String[tamanhoCaminho];
         for (int pos = 0; pos < tamanhoCaminho; pos++) {
@@ -220,59 +189,30 @@ public class PI_ADO8 {
         }
         return caminhoVis;
     }
-    
     public static int[] embaralhaBombas(int tamanhoCaminho, int qntBombas) {
         Random ran = new Random();
-
-        System.out.println("Tamanho caminho: " + tamanhoCaminho);
-
         int[] posBombasArray = new int[tamanhoCaminho];
-
-        int posBombas = 0, guarda;
-
-        boolean start = true;
-
-//        for (int pos = 0; pos < qntBombas; pos++) {
-//            posBombas = ran.nextInt(tamanhoCaminho);
-//            for (int posA = 0; posA < qntBombas; posA++) {
-//                if (posBombasArray[pos] == posBombasArray[posA]) {
-//                    posBombas = ran.nextInt(tamanhoCaminho);
-//                    posBombasArray[pos] = posBombas;
-//                } else {
-//                    posBombasArray[pos] = posBombas;
-//                }
-//            }
-//            System.out.print(posBombasArray[pos]+" ");
-//        }
-
+        int[] retornaBombas = new int[qntBombas];
+        int posBombas = 0, checkBombs = 0;
         int numeroBombasColocadas = 0;
         while (numeroBombasColocadas<qntBombas) {
-
             posBombas = ran.nextInt(tamanhoCaminho-1);
             if(posBombasArray[posBombas]!=-1){
                 posBombasArray[posBombas] = -1; 
                 numeroBombasColocadas++;
             }
-
-
-//            for (int posA = 0; posA < qntBombas; posA++) {
-//                if (posBombasArray[pos] == posBombasArray[posA]) {
-//                    posBombas = ran.nextInt(tamanhoCaminho);
-//                    posBombasArray[pos] = posBombas;
-//                } else {
-//                    posBombasArray[pos] = posBombas;
-//                }
-//            }
-//            System.out.print(posBombasArray[pos]+" ");
         }
-
-        for(int i=0;i<posBombasArray.length;i++){
-            System.out.print(posBombasArray[i] + "\t");
+        for (int pos = 0; pos < posBombasArray.length; pos++) {
+            if (posBombasArray[pos] == -1) {
+                retornaBombas[checkBombs] = pos;
+                checkBombs++;
+            }
         }
-
-        return posBombasArray;
+        for (int pos = 0; pos < posBombasArray.length; pos++) {
+            System.out.print(posBombasArray[pos]+"\t");
+        }
+        return retornaBombas;
     }
-    
     public static void visualizaPontos(int pontos) {
         if (pontos >= 100) {
             System.out.println(

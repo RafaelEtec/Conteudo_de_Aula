@@ -10,7 +10,6 @@ public class Final_ADO8 {
         Scanner ent = new Scanner(System.in);
         int tamanhoCaminho = 0, qntBombas, pontos = 0, posJogador;
         boolean jogando = true;
-        Random ran = new Random();
         
         // Inserindo valores
         // Tamanho do Caminho
@@ -190,7 +189,12 @@ public class Final_ADO8 {
                         System.out.println(
                         "| Cuidado ! Há bombas por perto!                                     |");
                     }
-                } else if (caminho[(posJogador - 1)] == -1) {
+                } else if (posJogador == (tamanhoCaminho - 1)) {
+                    if (caminho[(posJogador - 1)] == -1) {
+                        System.out.println(
+                        "| Cuidado ! Há bombas por perto!                                     |");
+                    }
+                } else if (caminho[(posJogador - 1)] == -1 || caminho[(posJogador + 1)] == -1) {
                     System.out.println(
                         "| Cuidado ! Há bombas por perto!                                     |");
                 }
@@ -218,6 +222,7 @@ public class Final_ADO8 {
                 caminhoVis[pos] = "_";
             }
         }
+        
         return caminhoVis;
     }
     
