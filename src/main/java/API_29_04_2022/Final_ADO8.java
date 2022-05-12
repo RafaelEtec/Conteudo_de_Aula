@@ -46,7 +46,7 @@ public class Final_ADO8 {
         // atruir as bombas à sua posição
         int posBombasArray[] = new int[qntBombas];
         posBombasArray = embaralhaBombas(tamanhoCaminho, qntBombas);
-        // Criando o caminho para visualização
+        // Criando o caminho para visualização  
         String[] caminhoVis = new String[tamanhoCaminho];
         caminhoVis = visualizaPosDis(tamanhoCaminho);
         // Criando o caminho para atribuir as bombas
