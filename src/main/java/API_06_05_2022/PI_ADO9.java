@@ -60,6 +60,7 @@ public class PI_ADO9 {
         
         // Criando array para guardar a posição das bombas
         int[][] posBombasArray = new int[qntBombas][qntBombas];
+        posBombasArray = embaralhaBombas(caminhoLin, caminhoCol, qntBombas);
         // Criando o caminho para visualização
         String[][] caminhoVis = new String[caminhoLin][caminhoCol];
         // Criando o caminho para atribuir as bombas
@@ -73,7 +74,13 @@ public class PI_ADO9 {
         }
         
         // Atribuindo as bombas ao caminho
-        
+        for (int posLin = 0; posLin < qntBombas; posLin++) {
+            for (int posCol = 0; posCol < qntBombas; posCol++) {
+                int guarda = posBombasArray[posLin][posLin];
+                int guardaProx = posBombasArray[posLin][posCol];
+                caminho[guarda][guardaProx] = -1;
+            }
+        }
         
         // Visualizando o caminho
         while (jogando) {
@@ -116,6 +123,50 @@ public class PI_ADO9 {
         }
         
         return caminhoVis;
+    }
+    
+    public static int[][] embaralhaBombas(int caminhoLin, int caminhoCol, int qntBombas) {
+        int[][] posBombasArray = new int[caminhoLin][caminhoCol];
+        int[][] retornaBombas = new int[qntBombas][qntBombas];
+        int posBombasLin = 0, posBombasCol = 0, checkBombs = 0, checkBombsProx = 0, guarda = 0, guardaProx = 0;
+        int numeroBombasColocadas = 0;
+        while (numeroBombasColocadas < qntBombas) {
+            posBombasLin = ran.nextInt(caminhoLin);
+            posBombasCol = ran.nextInt(caminhoCol);
+            if(posBombasArray[posBombasLin][posBombasCol]!= -1){
+                posBombasArray[posBombasLin][posBombasCol] = -1; 
+                numeroBombasColocadas++;
+            }
+        }
+        for (int posLin = 0; posLin < caminhoLin; posLin++) {
+            for (int posCol = 0; posCol < caminhoCol; posCol++) {
+                if (posBombasArray[posLin][posCol] == -1) {
+                    retornaBombas[checkBombs][checkBombsProx] = posLin;
+                    retornaBombas[checkBombs][checkBombsProx + 1] = posCol;
+                    checkBombs++;
+                }
+            }
+        }
+        
+        System.out.println();
+        for (int posLin = 0; posLin < qntBombas; posLin++) {
+            for (int posCol = 0; posCol < qntBombas; posCol++) {
+                System.out.print(retornaBombas[posLin][posCol]+"\t");
+            }
+            System.out.println();
+        }
+        
+        System.out.println();
+        //Mostra a posição das bombas
+        
+        for (int posLin = 0; posLin < caminhoLin; posLin++) {
+            for (int posCol = 0; posCol < caminhoCol; posCol++) {
+                System.out.print(posBombasArray[posLin][posCol]+ "\t");
+            }
+            System.out.println();
+        }
+
+        return retornaBombas;
     }
     
     public static void visualizaPontos(int pontos) {
